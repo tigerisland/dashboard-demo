@@ -34,9 +34,15 @@ class dashboard_dev(
         class { 'dashboard_dev::packages': }
         class { 'dashboard_dev::gems': }
 
-	user { 'puppet-dashoard':
+        group { 'puppet-dashboard':
+                name   => $puppet_dashboard,
+                ensure => present,
+        }
+
+	user { 'puppet-dashboard':
 		name => $puppet_dashboard,
 		gid  => $puppet_dashboard,
+                require => Group['puppet-dashboard'],
 	}
 
 	exec { 'git_clone':
@@ -63,7 +69,7 @@ class dashboard_dev(
 	$cmd_grant_privileges     = 'GRANT ALL PRIVILEGES ON dashboard_production.* TO \'dashboard\'@\'localhost\''
 
 	exec { 'init_database':
-		command => 'mysql -e "${cmd_create_database}; ${cmd_create_database_user}; ${cmd_grant_privileges}"',
+		command => 'mysql -e "${cmd_create_database};${cmd_create_database_user};${cmd_grant_privileges}"',
 		unless  => 'mysql -e \'show databases\' | grep \'dashboard_production\'',
 	}
 
@@ -90,6 +96,7 @@ class dashboard_dev(
 
 	exec { 'launch_dashboard':
 		command => '/opt/dashboard_launcher.sh',
+		cwd     => "/opt/${puppet_dashboard}",
 		unless  => 'netstat -an|grep \' 0 0.0.0.0:3000 \'',
 		require => [ File['/opt/dashboard_launcher.sh'], Exec['migrate_database'], ],
 	}
