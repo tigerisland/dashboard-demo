@@ -1,3 +1,4 @@
 name 'fhrbek-dashboard'
 version '0.0.0'
 
+dependency 'fhrbek/mysql', '>=0.1.0'
