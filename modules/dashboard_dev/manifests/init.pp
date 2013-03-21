@@ -15,7 +15,7 @@
 # Sample Usage:
 #
 # class { 'dashboard_dev':
-#   repo_ownder => 'joe',
+#   repo_owner => 'joe',
 #   repo_branch => 'performance_optimization',
 # }
 #
@@ -30,6 +30,9 @@ class dashboard_dev(
 	Exec {
 		path => [ '/usr/bin', '/bin', ],
 	}
+
+        class { 'dashboard_dev::packages': }
+        class { 'dashboard_dev::gems': }
 
 	user { 'puppet-dashoard':
 		name => $puppet_dashboard,
@@ -88,6 +91,6 @@ class dashboard_dev(
 	exec { 'launch_dashboard':
 		command => '/opt/dashboard_launcher.sh',
 		unless  => 'netstat -an|grep \' 0 0.0.0.0:3000 \'',
-		require => [ File['/tmp/launcher.sh'], Exec['migrate_database'], ],
+		require => [ File['/opt/dashboard_launcher.sh'], Exec['migrate_database'], ],
 	}
 }
