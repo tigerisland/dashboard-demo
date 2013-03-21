@@ -1,6 +1,6 @@
 class dashboard {
   class { 'dashboard_dev':
-    repo_branch => 'class_parameter_pr',
+    repo_branch => 'class_parameters_pr',
     repo_owner  => 'fhrbek',
   }
   include 'mysql::client'
