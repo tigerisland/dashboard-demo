@@ -2,7 +2,7 @@
 
 ./script/server -e production > /dev/null 2>&1 &
 
-ATTEMPTS=10
+ATTEMPTS=30
 
 while [ $ATTEMPTS -gt 0 ]; do
         echo "Attempts remaining: $ATTEMPTS"
