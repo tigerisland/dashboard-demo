@@ -27,6 +27,10 @@ class dashboard_dev(
 
 	$puppet_dashboard = 'puppet-dashboard'
 
+	Exec {
+		path => [ '/usr/bin', '/bin', ],
+	}
+
 	user { 'puppet-dashoard':
 		name => $puppet_dashboard,
 		gid  => $puppet_dashboard,
@@ -75,14 +79,14 @@ class dashboard_dev(
 		require => [ Class['dashboard_dev::packages'], Class['dashboard_dev::gems'], File["/opt/${puppet_dashboard}/config/database.yml"], Exec['init_database'] ],
 	}
 
-	file { '/tmp/launcher.sh':
+	file { '/opt/dashboard_launcher.sh':
 		ensure => present,
 		source => 'puppet://puppet/scripts/launcher.sh',
 		mode   => '0755',
 	}
 
 	exec { 'launch_dashboard':
-		command => '/tmp/launcher.sh',
+		command => '/opt/dashboard_launcher.sh',
 		unless  => 'netstat -an|grep \' 0 0.0.0.0:3000 \'',
 		require => [ File['/tmp/launcher.sh'], Exec['migrate_database'], ],
 	}
