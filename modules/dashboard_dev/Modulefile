@@ -1,0 +1,10 @@
+name 'fhrbek-dashboard_dev'
+version '0.0.1'
+
+author 'fhrbek'
+license ''
+project_page ''
+source ''
+summary ''
+description ''
+dependency 'fhrbek/mysql', '>=0.1.0'
