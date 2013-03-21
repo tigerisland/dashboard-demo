@@ -69,7 +69,7 @@ class dashboard_dev(
 	$cmd_grant_privileges     = 'GRANT ALL PRIVILEGES ON dashboard_production.* TO \'dashboard\'@\'localhost\''
 
 	exec { 'init_database':
-		command => 'mysql -e "${cmd_create_database};${cmd_create_database_user};${cmd_grant_privileges}"',
+		command => "mysql -e \"${cmd_create_database};${cmd_create_database_user};${cmd_grant_privileges}\"",
 		unless  => 'mysql -e \'show databases\' | grep \'dashboard_production\'',
 	}
 
