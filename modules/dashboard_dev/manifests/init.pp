@@ -69,7 +69,7 @@ class dashboard_dev(
 
 	file { "/opt/${puppet_dashboard}/config/database.yml":
 		ensure => present,
-		source  => 'puppet:///modules/${module_name}/config/database.yml',
+		source  => "puppet:///modules/${module_name}/config/database.yml",
 		owner   => $puppet_dashboard,
 		group   => $puppet_dashboard,
 		mode    => '0644',
@@ -84,7 +84,7 @@ class dashboard_dev(
 
 	file { '/opt/dashboard_launcher.sh':
 		ensure => present,
-		source => 'puppet:///modules/${module_name}/scripts/launcher.sh',
+		source => "puppet:///modules/${module_name}/scripts/launcher.sh",
 		mode   => '0755',
 	}
 
