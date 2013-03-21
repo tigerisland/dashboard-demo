@@ -27,43 +27,6 @@ class dashboard_dev(
 
 	$puppet_dashboard = 'puppet-dashboard'
 
-	class dashboard_dev::packages {
-		package { 'rubygem-rake':
-			ensure => present,
-		}
-
-		package { 'ruby-devel':
-			ensure => present,
-		}
-
-		package { 'mysql-devel':
-			ensure => present,
-		}
-
-		package { 'gcc':
-			ensure => present,
-		}
-
-		package { 'make':
-			ensure => present,
-		}
-	}
-
-	class dashboard_dev::gems {
-		package { 'rack':
-			ensure   => '1.1.6',
-			provider => 'gem',
-		}
-
-		package { 'mysql':
-			ensure   => present,
-			provider => 'gem',
-			require  => Class['mysql'],
-		}
-	}
-
-	Class['dashboard_dev::packages'] -> Class['dashboard_dev::gems']
-
 	user { 'puppet-dashoard':
 		name => $puppet_dashboard,
 		gid  => $puppet_dashboard,
