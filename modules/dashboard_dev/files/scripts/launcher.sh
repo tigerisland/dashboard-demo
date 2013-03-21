@@ -1,3 +1,5 @@
+#!/bin/sh
+
 ./script/server -e production > /dev/null 2>&1 &
 
 ATTEMPTS=10
