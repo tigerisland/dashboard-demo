@@ -1,3 +1,3 @@
-node demo {
+node node1 {
   include 'dashboard'
 }

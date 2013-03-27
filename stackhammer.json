@@ -1,6 +1,6 @@
 {
   "metaVersion": "1.1.6",
-  "accessKey": "cloudsmith",
+  "accessKey": "Wagner",
   "puppetVersion": "PUPPET27",
   "environments": [
     {
@@ -12,9 +12,14 @@
         {
           "type": "T1_MICRO",
           "deployState": "RUNNING",
-          "image": "ami-aecd60c7",
-          "role": "dashboard",
           "name": "demo"
+        },
+        {
+          "type": "T1_MICRO",
+          "deployState": "RUNNING",
+          "image": "ami-6227ad52",
+          "role": "dashboard",
+          "name": "node1"
         }
       ],
       "name": "production"
